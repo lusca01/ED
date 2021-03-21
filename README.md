@@ -1,2 +1,2 @@
-# ED - Atividades realizadas na disciplina Estrutura de Dados
+# ED - Atividades realizadas na disciplina Estrutura de Dados.
  
