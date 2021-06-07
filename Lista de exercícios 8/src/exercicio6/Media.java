@@ -54,5 +54,11 @@ public class Media {
 		+"\nMédia: " + this.media;
 		return aux;
 	}
+	
+	public String mostraFim() {
+		String aux = "Nome: " + this.aluno.getNomeAluno() + " Disciplina: " +this.disciplina.getNomeDisc()
+		+ "\nMédia: " + this.media + "\n";
+		return aux;
+	}
 
 }

@@ -73,7 +73,7 @@ public class Main {
 				JOptionPane.showMessageDialog(null,"Lista de Medias:"+l.verMedia());
 				break;
 			case 16:
-				
+				l.pegaVetor();
 				break;
 			case 99:
 				JOptionPane.showMessageDialog(null,"Encerrando...");

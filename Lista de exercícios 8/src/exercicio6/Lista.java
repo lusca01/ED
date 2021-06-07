@@ -17,7 +17,6 @@ package exercicio6;
 
 import javax.swing.JOptionPane;
 
-
 public class Lista {
 	private NOAluno inicioAluno;
 	private NODisciplina inicioDisc;
@@ -332,5 +331,67 @@ public class Lista {
 		}
 		JOptionPane.showMessageDialog(null,"Não tem nenhum aluno com esse ID, vai dar ruim!");
 		return null;
+	}
+	
+	public static void quickSort (Media vet[], int ini, int fim){
+		int divisao; 
+		if (ini < fim) { 
+			divisao = particao(vet, ini, fim); 
+			quickSort (vet, ini, divisao-1); 
+			quickSort (vet, divisao+1, fim); 
+		}
+	}
+
+	public static int particao (Media vet[], int ini, int fim){
+		Media pivo = vet[ini], aux;
+		int i = ini+1, f = fim; 
+		while (i<=f) { 
+			while (i <= fim && vet[i].getMedia() <= pivo.getMedia()) //Detalhe
+				++i; 
+			while (pivo.getMedia() < vet[f].getMedia()) 
+				--f; 
+			if (i < f){ 
+				aux = vet[i];
+				vet[i] = vet[f];
+				vet[f] = aux; 
+				++i; 
+				--f;
+			}	 
+		} 
+		if (ini != f){
+			vet[ini] = vet[f];
+			vet[f] = pivo;
+		} 
+		return f; 
+	}
+
+	public static void quick(Media vetor[]) {
+		Media lista[] = vetor, lista2[] = vetor, lista3[] = vetor;
+		int i;
+		System.out.println("Lista Inicial");
+		for(i=0;i<lista.length;i++){
+			System.out.print(lista[i].mostraFim()+"  ");
+		}
+
+		System.out.println("\n\nQuickSort - Lista Ordenada");
+		quickSort(lista3,0,(lista2.length)-1);
+		for(i=0;i<lista3.length;i++){
+			System.out.print(lista3[i].mostraFim()+"  ");
+		}
+	}
+	public void pegaVetor() {
+		NOMedia aux = inicioMedia;
+		int i=0;
+		while(aux != null) {
+			i++;
+			aux = aux.prox;
+		}
+		Media vet[] = new Media[i];
+		aux = inicioMedia;
+		for (int j = 0; j < i; j++) {
+			vet[j] = aux.media;
+			aux = aux.prox;
+		}
+		quick(vet);
 	}
 }
