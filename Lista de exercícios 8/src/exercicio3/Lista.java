@@ -311,6 +311,7 @@ public class Lista {
 		}
 		
 	}
+	
 	private Disciplina verificaDisciplina(int id) {
 		NODisciplina aux = inicioDisc;
 		while (aux != null) {
@@ -322,6 +323,7 @@ public class Lista {
 		JOptionPane.showMessageDialog(null,"Não tem nenhuma disciplina com esse ID, vai dar ruim!");
 		return null;
 	}
+	
 	private Aluno verificaAluno(int id) {
 		NOAluno aux = inicioAluno;
 		while (aux != null) {
@@ -332,5 +334,64 @@ public class Lista {
 		}
 		JOptionPane.showMessageDialog(null,"Não tem nenhum aluno com esse ID, vai dar ruim!");
 		return null;
+	}
+	
+	public static void mergeSortRecursivo(Media lista[], int inicio, int fim){
+		if (inicio < fim){
+			int meio = (inicio + fim) / 2;
+			mergeSortRecursivo(lista,inicio, meio);
+			mergeSortRecursivo(lista,meio + 1, fim);
+			mesclar(lista,inicio, meio, meio+1,fim); 
+		}
+	}	
+
+	public static void mesclar(Media lista[], int inicioA, int fimA, int inicioB, int fimB){
+		int i1 = inicioA; 
+		int i2 = inicioB;
+		int iaux = inicioA;
+		Media aux[] = new Media[lista.length];
+		while (i1 <= fimA && i2 <= fimB){
+			if(lista[i1].getMedia() <= lista[i2].getMedia())
+				aux[iaux++]=lista[i1++];
+			else
+				aux[iaux++]=lista[i2++];
+		}	
+		while (i1 <=fimA)
+			aux[iaux++]=lista[i1++];
+		while (i2 <=fimB)
+			aux[iaux++]=lista[i2++];
+		for (int i=inicioA;i<=fimB;i++)
+			lista[i] = aux[i];
+	}
+
+	public static void mergeSort(Media vetor[]) {
+		Media lista[] = vetor;
+		Media lista2[] = lista; int i;
+		System.out.println("Lista Inicial");
+		for(i=0;i<lista.length;i++){
+			System.out.print(lista[i].mostraFim()+"  ");
+		}
+
+		System.out.println("\nMergeSort - Lista Ordenada");
+		mergeSortRecursivo(lista2,0,(lista2.length)-1);
+		for(i=0;i<lista2.length;i++){
+			System.out.print(lista2[i].mostraFim()+"  ");
+		}
+	}
+	
+	public void pegaVetor() {
+		NOMedia aux = inicioMedia;
+		int i=0;
+		while(aux != null) {
+			i++;
+			aux = aux.prox;
+		}
+		Media vet[] = new Media[i];
+		aux = inicioMedia;
+		for (int j = 0; j < i; j++) {
+			vet[j] = aux.media;
+			aux = aux.prox;
+		}
+		mergeSort(vet);
 	}
 }
